@@ -241,26 +241,29 @@ Hands-on practice quest #01: pre-built disk image lifecycle (15+5)
 - [ ] Given пары участников
 
 - [ ] When участники именуют сценарии, выполняют команды и анализируют их вывод и поведение
-- Сценарий "Как ...?"
+- Сценарий "Как вывести список всех активных образов?"
 ```shell
 docker image ls # TODO: собственные пометки участников для будущего использования в проектах
 ```
 
-- Сценарий "Как ...?"
+- Сценарий "Как скачать образ из репозитория?"
 ```shell
 docker image pull alpine
 docker image ls
 ```
 
-- Сценарий "Как ...?"
+- Сценарий "Как получить сторию коммитов у образа?"
 ```shell
 docker image history alpine
 
 docker image inspect alpine
 docker image inspect --format='{{.Id}} -> {{.Parent}}' alpine
+#почему парент пустой?
+# docker image inspect --format='{{.Id}} -> {{.Parent}}' alpine
+# sha256:d4ff818577bc193b309b355b02ebc9220427090057b54a59e73b79bdfe139b83 -> 
 ```
 
-- Сценарий "Как ...?"
+- Сценарий "Как закомитить изменения в образ?"
 ```shell
 docker container run --name demo -it alpine
 /# touch side-effect.txt
@@ -270,13 +273,13 @@ docker container commit demo {{ registry-account }}/demo
 docker image ls
 ```
 
-- Сценарий "Как ...?"
+- Сценарий "Как создать тег и привязать его к образу?"
 ```shell
 docker image tag {{ registry-account }}/demo:latest {{ registry-account }}/demo:1.0.0
 docker image ls
 ```
 
-- Сценарий "Как ...?"
+- Сценарий "Как запушить образ во внешний репозиторий?"
 ```shell
 docker image push {{ registry-account }}/demo:1.0.0
 ```
