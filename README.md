@@ -353,7 +353,7 @@ Hands-on practice quest #02: container lifecycle (15+5)
 - Сценарий "Как посмотреть список работающих и остановленных контейнеров?"
 ```shell
 docker container ls --all
-docker container ls --format '{{.ID}} | {{.Names}} | {{.Status}} | {{.Image}}' 
+docker container ls --format '{{.ID}} | {{.Names}} | {{.Status}} | {{.Image}}' --all
 ```
 
 - Сценарий "Как запустить 'одноразовый' контейнер?"
@@ -372,51 +372,51 @@ curl localhost:80
 
 - Сценарий "Как 'подключиться' к работающему контейнеру?"
 ```shell
-docker container logs
+docker container logs proxy # needs container name
 docker container attach --sig-proxy=false # otherwise detach key `ctrl-c` will stop container 
-docker container top
-docker container exec -it /bin/sh
+docker container top proxy
+docker container exec -it proxy /bin/sh
 ```
 
 - Сценарий "Как посмотреть свойства контейнера?"
 ```shell
-docker container port
+docker container port proxy
 docker container inspect [| jq]
 ```
 
 - Сценарий "Как поставить на паузу контейнер?"
 ```shell
-docker container pause
-docker container unpause
+docker container pause proxy
+docker container unpause proxy
 ```
 
 - Сценарий "Как создать контейнер с сервисом без запуска?"
 ```shell
-docker container create
+docker container create service_name
 ```
 
 - Сценарий "Как запустить созданный контейнер?"
 ```shell
-docker container start
+docker container start container_name
 ```
 
 - Сценарий "Как остановить и запустить снова работающий контейнер?"
 ```shell
-docker container start
-docker container restart
-docker container stop # send SIGTERM, and then SIGKILL after grace period
-docker container kill # send SIGKILL, or specified signal
+docker container start container_name
+docker container restart container_name
+docker container stop container_name # send SIGTERM, and then SIGKILL after grace period
+docker container kill container_name # send SIGKILL, or specified signal
 ```
 
 - Сценарий "Как удалить работающий контейнер?"
 ```shell
-docker container rm --force
+docker container rm --force container_name
 ```
 
 - Сценарий "Как удалить остановленный контейнер?"
 ```shell
-docker container rm
-docker container prune
+docker container rm container_name
+docker container prune container_name
 ```
 
 - Сценарий "Как узнать и сохранить container data (container layer)?"
